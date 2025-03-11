@@ -18,9 +18,12 @@ export function StudentList({ onEdit }: StudentListProps) {
     try {
       let query = supabase.from('students').select('*');
       
-      if (searchTerm) {
-        query = query.ilike('name', `%${searchTerm}%`);
-      }
+      if (searchTerm && searchTerm.trim() !== '') {
+  query = query.ilike('name', `%${searchTerm}%`);
+} else {
+  query = query.order('created_at', { ascending: false });
+}
+
       
       const { data, error } = await query.order('created_at', { ascending: false });
 
