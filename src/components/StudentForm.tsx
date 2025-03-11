@@ -36,7 +36,7 @@ export function StudentForm({ onSuccess, initialData }: StudentFormProps) {
         await supabase.from('students').insert([formData]);
         toast.success('Student added successfully');
       }
-      onSuccess();
+      await onSuccess();
     } catch (error) {
       toast.error('An error occurred');
       console.error(error);
